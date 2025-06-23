@@ -15,6 +15,7 @@ html {
   --light-blue: #e2f1ff;
   --mid-blue: #83b9ff;
   --dark-blue: #1a7dff;
+  --red: #c80000;
 }
 
 body {
@@ -39,10 +40,19 @@ body {
   text-align: center;
 }
 
+.error-img {
+  width: 8rem;
+  padding-bottom: 3rem;
+}
+
 .gen-advice {
   padding: 3rem;
   font-size: 3rem;
   text-align: center;
+}
+
+.error {
+  color: var(--red);
 }
 
 .advice-btn {

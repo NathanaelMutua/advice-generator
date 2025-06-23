@@ -3,26 +3,40 @@ import "./App.css";
 
 function App() {
   const [advice, setAdvice] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    try {
-      async function fetchAdvice() {
-        const response = await fetch(`https://api.adviceslip.com/advice`);
+    async function fetchAdvice() {
+      try {
+        const response = await fetch(`https://api.adviceslip.com/advice/wrong`);
+
+        if (!response.ok) {
+          setErrorMessage("Something Went Wrong When Fetching Data!");
+          return;
+        }
+
         const data = await response.json();
         const advice = data.slip.advice;
-        setAdvice(advice);
+        setAdvice(advice); //updates the advice value
+      } catch (e) {
+        setErrorMessage("Something Went Wrong!");
       }
-
-      fetchAdvice();
-    } catch (e) {
-      console.log(`There was an error: ${e}`);
     }
-  }, []);
+
+    fetchAdvice();
+  }, []); // lack of dependencies ensures data fetching after every render
 
   return (
     <div className="advice-generator-body">
       <h1 className="title">Advice Generator</h1>
-      <p className="gen-advice">{advice}</p>
+      {errorMessage && (
+        <>
+          <p className="gen-advice error">{errorMessage}</p>
+          <img src="/message.png" alt="error-message" className="error-img" />
+        </>
+      )}
+      {advice && <p className="gen-advice">{advice}</p>}
+      {/* Advice is only shown if it exists */}
       <button className="advice-btn">Free Advice</button>
     </div>
   );
