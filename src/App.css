@@ -1,0 +1,61 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+:root {
+  --main-font: "Poppins", sans-serif;
+  --title-font: "Montserrat", sans-serif;
+  --white: #ffffff;
+  --light-blue: #e2f1ff;
+  --mid-blue: #83b9ff;
+  --dark-blue: #1a7dff;
+}
+
+body {
+  font-family: var(--main-font);
+  font-size: 1.6rem;
+}
+
+.advice-generator-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-blue);
+}
+
+.title {
+  position: absolute;
+  top: 4rem;
+  font-family: var(--title-font);
+  font-size: 4rem;
+}
+
+.gen-advice {
+  padding: 3rem;
+  font-size: 3rem;
+  text-align: center;
+}
+
+.advice-btn {
+  padding: 1rem 2rem;
+  border: 1.5px solid var(--dark-blue);
+  border-radius: 10px;
+  background-color: var(--mid-blue);
+  color: var(--white);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.advice-btn:hover {
+  background-color: var(--white);
+  color: darkblue;
+}
