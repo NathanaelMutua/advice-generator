@@ -7,8 +7,14 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // the use effect will call on the handleFetchData function on each render
   useEffect(() => {
+    handleFetchData();
+  }, []); // lack of dependencies ensures data fetching after every render
+
+  function handleFetchData() {
     setLoading(true);
+    setAdvice(null); // we want to clear the previous advice clause when we ask for another one
     async function fetchAdvice() {
       try {
         const response = await fetch(`https://api.adviceslip.com/advice`);
@@ -29,7 +35,7 @@ function App() {
     }
 
     fetchAdvice();
-  }, []); // lack of dependencies ensures data fetching after every render
+  }
 
   return (
     <div className="advice-generator-body">
@@ -43,7 +49,11 @@ function App() {
       )}
       {advice && <p className="gen-advice">{advice}</p>}
       {/* Advice is only shown if it exists */}
-      <button className="advice-btn" disabled={loading}>
+      <button
+        className="advice-btn"
+        onClick={handleFetchData}
+        disabled={loading}
+      >
         Free Advice
       </button>
     </div>
