@@ -17,9 +17,20 @@ Built as a practice project to reinforce React fundamentals and UI handling.
 - CSS
 - Material UI (for loader component)
 
-# Getting started
+## Getting started
 
 1. Fork my repo
 2. Clone the repo
 3. Install dependencies: `npm install`
 4. run the project: `npm run dev`
+
+## Imagery
+
+Working implementation
+![Working Advice Generator](/public/working-app.png)
+
+Fault in Fetching Data
+![Fetching Error](/public/fetch-error.png)
+
+Fault in Try block
+![TRy Block Error](/public/try-error.png)
