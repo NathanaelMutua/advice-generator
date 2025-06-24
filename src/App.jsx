@@ -3,7 +3,6 @@ import "./App.css";
 import Loader from "./components/Loader";
 
 function App() {
-  const [advice, setAdvice] = useState(null);
   const [adviceList, setAdviceList] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,36 +16,24 @@ function App() {
 
   function handleFetchData() {
     setLoading(true);
-    setAdvice(null); // we want to clear the previous advice clause when we ask for another one
-    async function fetchAdvice() {
+    setAdviceList([]); // we want to clear the previous advice list when we ask for another one
+    async function fetchAdviceList() {
       try {
-        const response = await fetch(`https://api.adviceslip.com/advice`);
+        const advicesList = []; // initiate an empty array for the advices
 
-        // I want to loop through and try and display multiple advices
-        const fetchSeveralAdvice = async () => {
-          const advicesList = []; // initiate an empty array for the advices
-
-          // the use of await instead of Promise.all is unconventionally slow but we will upgrade
-          for (let i = 0; i < 4; i++) {
-            const responses = await fetch(
-              `https://api.adviceslip.com/advice?timestamp=${Date.now() + i}` // the ?timestamp=${Date.now() + i} ensures/ tricks the API to think it's a new url each time
-            );
-            const datum = await responses.json();
-            advicesList.push(datum.slip.advice); // push the json data to the array
+        // the use of await instead of Promise.all is unconventionally slow but we will upgrade
+        for (let i = 0; i < 4; i++) {
+          const response = await fetch(
+            `https://api.adviceslip.com/advice?timestamp=${Date.now() + i}` // the ?timestamp=${Date.now() + i} ensures/ tricks the API to think it's a new url each time
+          );
+          if (!response.ok) {
+            setErrorMessage("Something Went Wrong When Fetching Data!");
+            return;
           }
-          setAdviceList(advicesList);
-        };
-
-        fetchSeveralAdvice();
-
-        if (!response.ok) {
-          setErrorMessage("Something Went Wrong When Fetching Data!");
-          return;
+          const data = await response.json();
+          advicesList.push(data.slip.advice); // push the json data to the array
         }
-
-        const data = await response.json();
-        const advice = data.slip.advice;
-        setAdvice(advice); //updates the advice value
+        setAdviceList(advicesList);
       } catch (e) {
         setErrorMessage("Something Went Wrong!");
       } finally {
@@ -54,7 +41,7 @@ function App() {
       }
     }
 
-    fetchAdvice();
+    fetchAdviceList();
   }
 
   return (
@@ -67,16 +54,14 @@ function App() {
           <img src="/message.png" alt="error-message" className="error-img" />
         </>
       )}
-      {/* Advice is only shown if it exists */}
-      {advice && <p className="gen-advice">{advice}</p>}
-      {adviceList ? (
-        <ul>
+      {adviceList.length > 0 && (
+        <ul className="advice-list">
           {adviceList.map((advice2, idx) => (
-            <li key={idx}>{advice2}</li>
+            <li key={idx} className="list-item">
+              {advice2}
+            </li>
           ))}
         </ul>
-      ) : (
-        <p>Error in Multiple Fetch</p>
       )}
       <button
         className="advice-btn"
