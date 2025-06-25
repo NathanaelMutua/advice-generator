@@ -16,6 +16,7 @@ html {
   --mid-blue: #83b9ff;
   --dark-blue: #1a7dff;
   --red: #c80000;
+  --black: #141414;
 }
 
 body {
@@ -45,10 +46,28 @@ body {
   padding-bottom: 3rem;
 }
 
-.gen-advice {
-  padding: 1rem 3rem;
-  font-size: 3rem;
+.advice-list {
+  margin-top: 7rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
   text-align: center;
+  gap: 1rem;
+}
+
+.list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50rem;
+  height: 12rem;
+  padding: 2rem 4rem;
+  border: 2px solid var(--white);
+  border-radius: 10px;
+  color: var(--white);
+  background-color: var(--black);
 }
 
 .error {
