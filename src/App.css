@@ -26,19 +26,32 @@ body {
 
 .advice-generator-body {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--light-blue);
 }
 
-.title {
-  position: absolute;
-  top: 5rem;
+.information-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: 4rem;
+}
+
+.header-section {
+  background-color: var(--light-blue);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.header-title {
   font-family: var(--title-font);
-  font-size: 4rem;
-  text-align: center;
+  font-size: 2rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 0.8rem;
 }
 
 .error-img {
@@ -47,14 +60,13 @@ body {
 }
 
 .advice-list {
-  margin-top: 7rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   list-style-type: none;
   text-align: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .list-item {
@@ -74,12 +86,17 @@ body {
   color: var(--red);
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-block: 4rem;
+}
+
 .advice-btn {
-  margin-top: 3rem;
   padding: 1rem 2rem;
   border: 1.5px solid var(--dark-blue);
   border-radius: 10px;
-  background-color: var(--mid-blue);
+  background-color: var(--dark-blue);
   color: var(--white);
   font-size: 1.8rem;
   cursor: pointer;

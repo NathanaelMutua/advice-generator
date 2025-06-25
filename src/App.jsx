@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Loader from "./components/Loader";
+import Header from "./components/Header";
 
 function App() {
   const [adviceList, setAdviceList] = useState([]);
@@ -45,32 +46,42 @@ function App() {
   }
 
   return (
-    <div className="advice-generator-body">
-      <h1 className="title">Advice Generator</h1>
-      {loading && <Loader className="loader" />}
-      {errorMessage && (
-        <>
-          <p className="gen-advice error">{errorMessage}</p>
-          <img src="/message.png" alt="error-message" className="error-img" />
-        </>
-      )}
-      {adviceList.length > 0 && (
-        <ul className="advice-list">
-          {adviceList.map((advice2, idx) => (
-            <li key={idx} className="list-item">
-              {advice2}
-            </li>
-          ))}
-        </ul>
-      )}
-      <button
-        className="advice-btn"
-        onClick={handleFetchData}
-        disabled={loading}
-      >
-        Free Advice
-      </button>
-    </div>
+    <>
+      <div className="advice-generator-body">
+        <Header />
+        <section className="information-section">
+          {loading && <Loader className="loader" />}
+          {errorMessage && (
+            <>
+              <p className="gen-advice error">{errorMessage}</p>
+              <img
+                src="/message.png"
+                alt="error-message"
+                className="error-img"
+              />
+            </>
+          )}
+          {adviceList.length > 0 && (
+            <ul className="advice-list">
+              {adviceList.map((advice2, idx) => (
+                <li key={idx} className="list-item">
+                  {advice2}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+        <div className="button-container">
+          <button
+            className="advice-btn"
+            onClick={handleFetchData}
+            disabled={loading}
+          >
+            Free Advice
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 
