@@ -34,3 +34,6 @@ Fault in Fetching Data
 
 Fault in Try block
 ![TRy Block Error](/public/try-error.png)
+
+
+> I am still gradually improving it!
